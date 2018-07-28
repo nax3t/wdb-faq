@@ -10,7 +10,7 @@ module.exports = {
 		console.log('registering user');
 		let newUser = await User.register(new User({username: req.body.username}), req.body.password);
 	  // Check for isAdmin
-		req.body.isAdmin === process.env.IS_ADMIN_CODE ? newUser.isAdmin = true ; newUser.isAdmin = false;
+		req.body.isAdmin === process.env.IS_ADMIN_CODE ? newUser.isAdmin = true : newUser.isAdmin = false;
 		newUser.save();
 		console.log('user registered!');
 		res.redirect('/');
