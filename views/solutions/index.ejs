@@ -1,0 +1,20 @@
+<% layout('layouts/index') -%>
+
+<h1>Welcome to The Web Developer Bootcamp FAQ</h1>
+
+<h2>Solutions Index</h2>
+
+<form action="/solutions" method="GET">
+	<input type="text" name="search" placeholder="Question">
+
+	<input type="submit">
+</form>
+
+<% solutions.forEach(function(solution) { %>
+
+<div>
+	<a href="<%= solution.url %>"><%= solution.title %></a>
+	<%= currentUser && currentUser.isAdmin ? '- <a href="">Edit</a> Delete' : '' %>
+</div>
+
+<% }); %>

@@ -1,6 +1,11 @@
 const User = require('../models/user');
+const passport = require('passport');
 
 module.exports = {
+	// GET Home
+	getHome(req, res, next) {
+		res.redirect('/solutions')
+	},
 	// GET Register
 	getRegister(req, res, next) {
 		res.render('register');
@@ -21,7 +26,14 @@ module.exports = {
 	},
 	// POST Login
 	async postLogin(req, res, next) {
-		await passport.authenticate('local')(req, res, next);
-		res.redirect('/');
+		await passport.authenticate('local', {
+		  successRedirect: '/',
+		  failureRedirect: '/login' 
+		})(req, res, next);
+	},
+	// GET Logout
+	async getLogout(req, res, next) {
+	  await req.logout();
+	  res.redirect('/');
 	}
 }

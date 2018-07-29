@@ -1,0 +1,14 @@
+<% layout('layouts/index') -%>
+
+<h1><%= solution.title %></h1>
+
+<div>
+	<%= solution.url %>
+</div>
+<% solution.keywords.forEach(function(keyword) { %>
+
+<div>
+	<%= keyword %>
+</div>
+
+<% }); %>

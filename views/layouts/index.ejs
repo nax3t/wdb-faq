@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Web Developer Bootcamp FAQ</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  	<div>
+		<% if(currentUser) { %>
+
+			<%= currentUser.username %> is logged in.
+
+		<% } %>
+  	</div>
+    <div>
+    <% if(error && error.length > 0) { %>
+
+			<%= error %>
+
+    <% } else if(success && success.length > 0) { %>
+
+			<%= success %>
+
+    <% } %>
+    </div>
+
+    <%- body -%>
+
+  </body>
+</html>

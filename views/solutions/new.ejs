@@ -1,0 +1,19 @@
+<% layout('layouts/index') -%>
+
+<h1>New Solution</h1>
+
+<form action="/solutions" method="POST">
+	<div>
+		<input type="text" name="solution[title]" placeholder="Title">
+	</div>
+	<div>
+		<input type="text" name="solution[url]" placeholder="Url">
+	</div>
+	<div>
+		<input type="text" name="solution[keywords]" placeholder="Keywords (comma separated)">
+	</div>
+
+	<div>
+		<input type="submit">
+	</div>
+</form>

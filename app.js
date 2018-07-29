@@ -10,8 +10,12 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
+const flash = require('connect-flash');
+const methodOverride = require('method-override');
+const engine = require('ejs-mate');
 
-const index = require('./routes/index');
+const indexRoutes = require('./routes/index');
+const solutionRoutes = require('./routes/solutions');
 
 const app = express();
 
@@ -24,6 +28,7 @@ db.once('open', function() {
 });
 
 // view engine setup
+app.engine('ejs', engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -34,6 +39,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 
 // Configure session
 app.use(session({
@@ -42,14 +48,28 @@ app.use(session({
   saveUninitialized: true
 }));
 
-// Configure passport-local to use User model for authentication
+// Configure passport
+app.use(passport.initialize());
+app.use(passport.session());
 const User = require('./models/user');
 passport.use(new LocalStrategy(User.authenticate()));
-
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use('/', index);
+// Use flash messages
+app.use(flash());
+
+// Set flash messages
+app.use((req, res, next) => {
+	res.locals.error = req.flash('error');
+	res.locals.success = req.flash('success');
+	res.locals.currentUser = req.user;
+
+	next();
+});
+
+app.use('/', indexRoutes);
+app.use('/solutions', solutionRoutes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
