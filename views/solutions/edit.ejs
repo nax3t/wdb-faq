@@ -2,15 +2,15 @@
 
 <h1>Edit Solution</h1>
 
-<form action="/solutions?_method=PUT" method="POST">
+<form action="/solutions/<%= solution.id %>?_method=PUT" method="POST">
 	<div>
-		<input type="text" name="solution[title]" placeholder="Title">
+		<input type="text" name="solution[title]" value="<%= solution.title %>" placeholder="Title">
 	</div>
 	<div>
-		<input type="text" name="solution[url]" placeholder="Url">
+		<input type="text" name="solution[url]" value="<%= solution.url %>" placeholder="Url">
 	</div>
 	<div>
-		<input type="text" name="solution[keywords]" placeholder="Keywords (comma separated)">
+		<input type="text" name="solution[keywords]" value="<%= solution.keywords %>" placeholder="Keywords (comma separated)">
 	</div>
 
 	<div>

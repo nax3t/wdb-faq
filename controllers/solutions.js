@@ -34,29 +34,30 @@ module.exports = {
 	// POST - Create
 	async createSolution(req, res, next) {
 		req.body.solution.keywords = req.body.solution.keywords.split(',');
-		Solution.create(req.body.solution);
+		await Solution.create(req.body.solution);
 		req.flash('success', 'Solution created successfully!');
 		res.redirect('/solutions')
 	},
-	// GET - Show
-	async showSolution(req, res, next) {
-		let solution = Solution.findById(req.params.id);
-		res.render('solutions/show', { solution });
-	},
+	// // GET - Show
+	// async showSolution(req, res, next) {
+	// 	let solution = await Solution.findById(req.params.id);
+	// 	res.render('solutions/show', { solution });
+	// },
 	// GET - Edit
 	async editSolution(req, res, next) {
-		let solution = Solution.findById(req.params.id);
+		let solution = await Solution.findById(req.params.id);
 		res.render('solutions/edit', { solution });
 	},
 	// PUT - Update
 	async updateSolution(req, res, next) {
-		Solution.findByIdAndUpdate(req.params.id, req.body.solution);
+		req.body.solution.keywords = req.body.solution.keywords.split(',');
+		await Solution.findByIdAndUpdate(req.params.id, req.body.solution);
 		req.flash('success', 'Solution updated successfully!');
 		res.redirect('/solutions');
 	},
 	// DELETE - Destroy
 	async destroySolution(req, res, next) {
-		let solution = Solution.findByIdAndRemove(req.params.id);
+		await Solution.findByIdAndRemove(req.params.id);
 		req.flash('success', 'Solution destroyed successfully!');
 		res.redirect('/solutions');
 	}

@@ -14,7 +14,12 @@
 
 <div>
 	<a href="<%= solution.url %>"><%= solution.title %></a>
-	<%= currentUser && currentUser.isAdmin ? '- <a href="">Edit</a> Delete' : '' %>
+	<% if(currentUser && currentUser.isAdmin) { %>
+	<a href="/solutions/<%= solution.id %>/edit"><button>Edit</button></a> 
+	<form action="/solutions/<%= solution.id %>?_method=DELETE" method="POST" style="display: inline-block;">
+		<input type="submit" value="Delete">
+	</form>
+	<% } %>
 </div>
 
 <% }); %>

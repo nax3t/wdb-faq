@@ -5,7 +5,7 @@ const {
 	indexSolutions,
 	newSolution,
 	createSolution,
-	showSolution,
+	// showSolution,
 	editSolution,
 	updateSolution,
 	destroySolution
@@ -34,6 +34,6 @@ router.get('/:id/edit', errorHandler(editSolution));
 router.put('/:id', errorHandler(updateSolution));
 
 /* DELETE Destroy */
-router.put('/:id', errorHandler(destroySolution));
+router.delete('/:id', errorHandler(destroySolution));
 
 module.exports = router;
