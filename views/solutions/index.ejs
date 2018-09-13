@@ -4,22 +4,39 @@
 
 <h2>Solutions Index</h2>
 
-<form action="/solutions" method="GET">
+<form action="/solutions" method="GET" class="mb-10">
 	<input type="text" name="search" placeholder="Question">
 
 	<input type="submit">
 </form>
 
-<% solutions.forEach(function(solution) { %>
+<table border="1" class="results-table">
+	<% solutions.forEach(function(solution) { %>
+	<tr>
+		<td>
+			<div class="mb-10">
+				<a href="<%= solution.url %>"><%= solution.title %></a>
+				<% if(currentUser && currentUser.isAdmin) { %>
+				<a href="/solutions/<%= solution.id %>/edit"><button>Edit</button></a> 
+				<form action="/solutions/<%= solution.id %>?_method=DELETE" method="POST" style="display: inline-block;">
+					<input type="submit" value="Delete">
+				</form>
+				<% } %>
+			</div>
+		</td>
+	</tr>
+	<% }); %>
+</table>
 
-<div>
-	<a href="<%= solution.url %>"><%= solution.title %></a>
-	<% if(currentUser && currentUser.isAdmin) { %>
-	<a href="/solutions/<%= solution.id %>/edit"><button>Edit</button></a> 
-	<form action="/solutions/<%= solution.id %>?_method=DELETE" method="POST" style="display: inline-block;">
-		<input type="submit" value="Delete">
-	</form>
-	<% } %>
-</div>
 
-<% }); %>
+<h3>Routes:</h3>
+<ul>
+	<li>/</li>
+	<li>/register</li>
+	<li>/login</li>
+	<li>/logout</li>
+	<li>/solutions</li>
+	<li>/solutions/new</li>
+	<li>/solutions/:id/edit</li>
+</ul>
+

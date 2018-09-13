@@ -6,3 +6,16 @@ body {
 a {
   color: #00B7FF;
 }
+
+.mb-10 {
+	margin-bottom: 10px;
+}
+
+.results-table {
+	border: 1px solid grey;
+	border-collapse: collapse;
+}
+
+.results-table td {
+	padding: 10px;
+}
