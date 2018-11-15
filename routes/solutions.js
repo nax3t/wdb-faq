@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { errorHandler, isAdmin } = require('../middleware');
+const { asyncErrorHandler, isAdmin } = require('../middleware');
 const { 
 	indexSolutions,
 	newSolution,
@@ -13,7 +13,7 @@ const {
 
 
 /* GET Index */
-router.get('/', errorHandler(indexSolutions));
+router.get('/', asyncErrorHandler(indexSolutions));
 
 // Protect routes
 router.use(isAdmin);
@@ -22,18 +22,18 @@ router.use(isAdmin);
 router.get('/new', newSolution);
 
 /* POST Create */
-router.post('/', errorHandler(createSolution));
+router.post('/', asyncErrorHandler(createSolution));
 
 // /* GET Show */
-// router.get('/:id', errorHandler(showSolution));
+// router.get('/:id', asyncErrorHandler(showSolution));
 
 /* GET Edit */
-router.get('/:id/edit', errorHandler(editSolution));
+router.get('/:id/edit', asyncErrorHandler(editSolution));
 
 /* PUT Update */
-router.put('/:id', errorHandler(updateSolution));
+router.put('/:id', asyncErrorHandler(updateSolution));
 
 /* DELETE Destroy */
-router.delete('/:id', errorHandler(destroySolution));
+router.delete('/:id', asyncErrorHandler(destroySolution));
 
 module.exports = router;

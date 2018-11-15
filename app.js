@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const debug = require('debug')('wdb-faq:main');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
@@ -14,17 +15,18 @@ const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const engine = require('ejs-mate');
 
+const authRouter = require('./routes/user.js');
 const indexRoutes = require('./routes/index');
 const solutionRoutes = require('./routes/solutions');
 
 const app = express();
 
 // Connect to mongodb database
-mongoose.connect('mongodb://localhost:27017/wdb-faq-app', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/wdb-faq-app', { useNewUrlParser: true ,useCreateIndex:true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  console.log('Database connected');
+  debug('Database connected');
 });
 
 // view engine setup
@@ -69,6 +71,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', indexRoutes);
+app.use('/auth', authRouter);
 app.use('/solutions', solutionRoutes);
 
 // catch 404 and forward to error handler
