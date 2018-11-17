@@ -2,16 +2,11 @@
 <html>
   <head>
     <title>The Web Developer Bootcamp FAQ</title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-  	<div>
-		<% if(currentUser) { %>
-
-			<%= currentUser.username %> is logged in.
-
-		<% } %>
-  	</div>
+    <% include ../partials/nav %>
     <div>
     <% if(error && error.length > 0) { %>
 
@@ -25,6 +20,7 @@
     </div>
 
     <%- body -%>
-
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
