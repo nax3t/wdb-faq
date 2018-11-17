@@ -1,0 +1,17 @@
+<% layout('layouts/index') -%>
+<h1><%= title %></h1>
+<form action="/auth/register" method="post">
+  <label for="email">Email:</label>
+  <input type="email" name="email" id="email">
+  <label for="username">Username:</label>
+  <input type="text" name="username" id="username">
+  <% if(!adminSearch || !adminSearch.length) { %>
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password">
+    <label for="confirmationPassword">Confirm Password:</label>
+    <input type="password" name="confirmationPassword" id="confirmationPassword">
+    <label for="adminCode">Admin Code (case sensitive):</label>
+    <input type="text" name="adminCode" id="adminCode">
+  <% } %>
+  <button type="submit">Register</button>
+</form>
